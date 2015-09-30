@@ -18,4 +18,4 @@ chmod +x "$TMP_FILE"
 open -b com.apple.terminal "$TMP_FILE"
 
 sleep 1 # Wait for terminal to start
-#rm "$TMP_FILE"
+rm "$TMP_FILE"
