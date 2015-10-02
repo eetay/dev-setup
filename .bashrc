@@ -1,9 +1,14 @@
+function git_branch {
+	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/^* \(.*\)/(\1)/'
+}
+export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\[\033[36m\](\$(git_branch))\[\033[m\]> "
+export PS1="\[\033[31m\]\u:\[\033[33;1m\]\w\[\033[m\]\[\033[36m\]\$(git_branch)\[\033[m\]> "
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
 alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 alias cls='clear'
-alias bashrc="source ~/.bashrc"
+alias bashrc="source ~/.profile ~/.bashrc"
 alias db-migrate='rake db:migrate'
 alias dboops='rake db:rollback'
 alias dir='ls'
