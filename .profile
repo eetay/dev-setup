@@ -1,5 +1,7 @@
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
+export GREP_COLOR='91'
+alias grep="grep --color"
 alias ls='ls -GFh'
 #export PS1="\u@\h:\w>"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

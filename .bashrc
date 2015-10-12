@@ -6,6 +6,8 @@ export PS1="\[\033[31m\]\u:\[\033[33;1m\]\w\[\033[m\]\[\033[36m\]\$(git_branch)\
 function rspec-smoke {
 	rspec spec -b --tag smoke --format p --format d --out tmp/rspec-smoke-results
 }
+alias ssh-fingerprint="ssh-keygen -lf "
+alias ssh-getpub="ssh-keygen -m PKCS8 -y -f "
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
@@ -32,3 +34,4 @@ alias new-terminal-tab='osascript -e "tell application \"Terminal\" to activate"
 function rails-diff {
 	colordiff -d -w -B -u -r -x Gemfile.lock -x log -x .git -x tmp "$@"
 }
+alias upload="./samanage_ey.rb recipes upload -e audit_testing --apply"
