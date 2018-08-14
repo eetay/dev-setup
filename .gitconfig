@@ -1,6 +1,6 @@
 [core]
 	excludesfile = /Users/eetay/.gitignore_global
-	editor = /usr/bin/vim
+	editor = /usr/local/bin/vim
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -12,3 +12,11 @@
 	email = eetay.natan@samanage.com
 [push]
 	default = simple
+[status]
+	submoduleSummary = true
+[alias]
+	su = submodule update
+	co = checkout
+	ci = commit
+  st = status
+  brs = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:green)%(committerdate:short)%(color:reset) - %(objectname:short) - %(color:yellow)%(refname:short)%(color:reset))'

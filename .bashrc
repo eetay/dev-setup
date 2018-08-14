@@ -1,3 +1,15 @@
+alias vi=vim
+export EVENT_NOKQUEUE=1
+export SNYK_TOKEN=931ca9c3-b31b-4c84-9943-8b69f691c16d
+alias git-subm-status='git status && git submodule foreach "git status"'
+function git-subm-verify-on-master {
+  git submodule foreach -q --recursive 'git branch --contains `git rev-parse HEAD` | grep "^ *master" || echo "Problem: $name is now NOT on master" '
+}
+alias git-show-tags='git log --tags --simplify-by-decoration --pretty="format:%ci %d"'
+alias git-subm-pull='git pull --recurse-submodules && git submodule update && git-subm-verify-on-master'
+alias git-subm-push='git push --recurse-submodules=on-demand'
+alias add-root-cert='sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain'
+alias webstorm='open -a /Applications/WebStorm.app'
 function git_branch {
 	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/^* \(.*\)/(\1)/'
 }
@@ -14,13 +26,17 @@ function docker-start {
   docker-machine regenerate-certs default
   eval "$(docker-machine env default)"
 }
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --js-flags='--stack-trace-limit 10000'"
 alias rails-debug="RAILS_DEBUG=1 rails s "
 alias ssh-fingerprint="ssh-keygen -lf "
 alias ssh-getpub="ssh-keygen -m PKCS8 -y -f "
+#alias -="less"
+alias ll="ls -la"
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
 alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+alias atom='/Applications/Atom.app/Contents/MacOS/Atom'
 export BUNDLER_EDITOR='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 alias cls='echo "----------------------------------------------------" && clear'
 alias bashrc="source ~/.profile; source ~/.bashrc"
@@ -29,7 +45,8 @@ alias dboops='rake db:rollback'
 alias dir='ls'
 alias mk-db-migration='rails generate migration '
 alias mysqld='sudo /usr/local/mysql/support-files/mysql.server'
-alias rq-start-all='rake resque:work QUEUE="high low_high_mem medium ts_delta failed"'
+#alias mysqld='echo Use "brew services restart mysql" '
+alias rq-start-all='rake resque:work QUEUE="high,low_high_mem,medium,ts_delta,failed"'
 _rqstart() {
 	rake resque:work QUEUE="$@"
 }
@@ -49,4 +66,25 @@ function rails-diff {
 }
 alias upload="./samanage_ey.rb recipes upload -e audit_testing --apply"
 alias rspec-next='rake db:test:prepare && rspec spec --exclude-pattern "**/requests/*_spec.rb" --fail-fast' 
+alias aws='aws --region us-east-1 --profile samanage-sandbox'
 #alias rspec-next='rspec spec --exclude-pattern "**/requests/*_spec.rb" --fail-fast' 
+[ -f ~/.git-completion.bash ] && . ~/.git-completion.bash
+
+
+if (echo "$-" | grep i); then
+  echo "interactive"
+  docker-machine start
+  # sudo /usr/local/mysql/support-files/mysql.server start
+fi
+export AWS_SDK_LOAD_CONFIG=1
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[ -f /Users/eetay/.nvm/versions/node/v7.3.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /Users/eetay/.nvm/versions/node/v7.3.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[ -f /Users/eetay/.nvm/versions/node/v7.3.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /Users/eetay/.nvm/versions/node/v7.3.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
+
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+nvm alias default 9.10.0
