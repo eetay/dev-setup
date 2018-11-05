@@ -87,4 +87,4 @@ export AWS_SDK_LOAD_CONFIG=1
 
 export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
-nvm alias default 9.10.0
+nvm alias default 9.11.1
